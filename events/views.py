@@ -23,6 +23,7 @@ from .serializers import (
 # ---------- Events ----------
 
 @api_view(["GET", "POST"])
+@permission_classes([AllowAny])
 def event_list_create(request):
     """
     GET  /api/events/ — public list of published events (FR-06, FR-07).
@@ -52,6 +53,7 @@ def event_list_create(request):
 
 
 @api_view(["GET", "PATCH"])
+@permission_classes([AllowAny])
 def event_detail(request, pk):
     """
     GET  /api/events/{id}/ — event detail with sessions and tiers.
