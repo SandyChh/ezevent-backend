@@ -109,6 +109,14 @@ STORAGES = {
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# ---------- Cache (required by django-ratelimit for shared rate-limit state) ----------
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+        "LOCATION": "django_cache",
+    }
+}
+
 # ---------- Django REST Framework ----------
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
