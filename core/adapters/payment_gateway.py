@@ -27,6 +27,22 @@ class PaymentGateway:
             idempotency_key=idempotency_key,
         )
         return intent.client_secret
+    
+    @classmethod
+    def retrieve_intent(cls, payment_intent_id):
+        """
+        Retrieve a specific PaymentIntent by ID.
+        Used in step 8 of the sequence diagram for server-side verification.
+        Returns a dict with 'id' and 'status', or None.
+        """
+        if not payment_intent_id:
+            return None
+        cls._configure()
+        try:
+            pi = stripe.PaymentIntent.retrieve(payment_intent_id)
+            return {"id": pi.id, "status": pi.status}
+        except Exception:
+            return None
 
     @classmethod
     def retrieve_intent_for_registration(cls, registration_id):

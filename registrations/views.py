@@ -69,7 +69,8 @@ def registration_confirm(request, pk):
             status=status.HTTP_403_FORBIDDEN,
         )
 
-    confirmed = ConfirmRegistrationService.execute(registration.pk)
+    payment_intent_id = request.data.get("payment_intent_id")
+    confirmed = ConfirmRegistrationService.execute(registration.pk, payment_intent_id=payment_intent_id)
     return Response(RegistrationSerializer(confirmed).data)
 
 

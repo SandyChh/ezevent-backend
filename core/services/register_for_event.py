@@ -104,7 +104,7 @@ class ConfirmRegistrationService:
     """
 
     @staticmethod
-    def execute(registration_id):
+    def execute(registration_id, payment_intent_id=None):
         with transaction.atomic():
             registration = RegistrationRepo.get_by_id(registration_id)
 
@@ -118,7 +118,7 @@ class ConfirmRegistrationService:
                 raise CapacityExhaustedError()
 
             # Step 8: verify PaymentIntent server-side via Stripe
-            intent = PaymentGateway.retrieve_intent_for_registration(registration.pk)
+            intent = PaymentGateway.retrieve_intent(payment_intent_id)
             if not intent or intent.get("status") != "succeeded":
                 raise PaymentFailedError()
 
