@@ -1,0 +1,19 @@
+EventEase — Ticket Confirmation
+================================
+
+Hi {{ attendee_name }},
+
+Your registration for "{{ event_title }}" has been confirmed.
+
+Event:  {{ event_title }}
+Date:   {{ event_date|date:"l, d F Y \a\t g:i A" }}
+Venue:  {{ event_venue }}
+Tier:   {{ tier_name }}
+
+View your ticket online: {{ confirmation_url }}
+
+Your QR code is attached to this email. Present it at the venue for check-in.
+
+---
+To unsubscribe from future emails: {{ unsubscribe_url }}
+EventEase — Event Management System
